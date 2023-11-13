@@ -64,9 +64,8 @@ class Individual:
             Translated sequence of amino acids for sample
         """
 
-        dna_seq = Seq(self.nuc_seq)
-        aa_seq = dna_seq.translate()
-        return aa_seq
+        aa_seq = self.nuc_seq.translate()
+        return str(aa_seq)
 
 
     def determine_phenotype(self):
@@ -113,10 +112,10 @@ def read_fasta(filepath):
         header = record.description.split("_")
         sample_id = header[0]
         seq_date = header[1]
-        nuc_seq = str(record.seq)
+        nuc_seq = record.seq
         individual = Individual(sample_id, seq_date, nuc_seq)
         individuals.append(individual)
-    return indivdiuals
+    return individuals
 
 def total_sample_set(individuals):
 
@@ -134,10 +133,10 @@ def total_sample_set(individuals):
         Total sample size
     """
 
-    n = len(indivduals)
+    n = len(individuals)
     return n
 
-def total_orange_phenotype(indivduals):
+def total_orange_phenotype(individuals):
 
     """
     Determines the number of samples with the "orange" phenotype
@@ -235,20 +234,22 @@ def create_output_file(filepath, n, k, p, bernoulli):
     None
     """
 
+    output_string = (
+        f"Results\n"
+        f"p (the frequency of \"orange\" in the population) = {p}\n"
+        f"n (the number of sample individuals) = {n}\n"
+        f"k (the number of \"orange\" individuals in the sample set) = {k}\n\n"
+        f"Probability of collecting ? individuals with ? being \"orange\" (given a population frequency of {p} = {bernoulli}\n"
+    )
     with open(filepath, "w") as outfile:
-        print("Results\n")
-        print("p (the frequency of \"orange\" in the population) = " + str(p))
-        print("n (the number of sample individuals) = " + str(n))
-        print("k (the number of \"orange\" individuals in the sample set) = " + str(k))
-        print("\n")
-        print("FINAL LINE")
+        outfile.write(output_string)
     print("Output file written.")
 
 def main():
     if len(sys.argv) != 4:
-        sys.exit(sys.argv[0] + ": Expecting three arguments (input_file, probability, output_file)"
+        sys.exit(sys.argv[0] + ": Expecting three arguments (input_file, probability, output_file)")
     input_file = sys.argv[1]
-    p = sys.argv[2]
+    p = float(sys.argv[2])
     output_file = sys.argv[3]
     individuals = read_fasta(input_file)
     n = total_sample_set(individuals)

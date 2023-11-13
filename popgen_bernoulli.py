@@ -242,6 +242,19 @@ def create_output_file(filepath, n, k, p, bernoulli):
         print("k (the number of \"orange\" individuals in the sample set) = " + str(k))
         print("\n")
         print("FINAL LINE")
+    print("Output file written.")
 
 def main():
+    if len(sys.argv) != 4:
+        sys.exit(sys.argv[0] + ": Expecting three arguments (input_file, probability, output_file)"
+    input_file = sys.argv[1]
+    p = sys.argv[2]
+    output_file = sys.argv[3]
+    individuals = read_fasta(input_file)
+    n = total_sample_set(individuals)
+    k = total_orange_phenotype(individuals)
+    bernoulli = calculate_bernoulli(n, k, p)
+    create_output_file(output_file, n, k, p, bernoulli)
 
+if __name__=="__main__":
+    main()

@@ -3,4 +3,4 @@ p (the frequency of "orange" in the population) = 0.3
 n (the number of sample individuals) = 100
 k (the number of "orange" individuals in the sample set) = 26
 
-Probability of collecting ? individuals with ? being "orange" (given a population frequency of 0.3 = 0.06126913528290234
+Probability of collecting 100 individuals with 26 being "orange" (given a population frequency of 0.3 = 0.06126913528290234

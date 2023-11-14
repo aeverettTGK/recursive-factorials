@@ -239,7 +239,7 @@ def create_output_file(filepath, n, k, p, bernoulli):
         f"p (the frequency of \"orange\" in the population) = {p}\n"
         f"n (the number of sample individuals) = {n}\n"
         f"k (the number of \"orange\" individuals in the sample set) = {k}\n\n"
-        f"Probability of collecting ? individuals with ? being \"orange\" (given a population frequency of {p} = {bernoulli}\n"
+        f"Probability of collecting {n} individuals with {k} being \"orange\" (given a population frequency of {p} = {bernoulli}\n"
     )
     with open(filepath, "w") as outfile:
         outfile.write(output_string)
